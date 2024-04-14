@@ -57,7 +57,7 @@ The Setup simply requires the Availability of MERN Framework along with its depe
 
 ## Acknowledgments
 
-_Mention all those who helped you build the project, inspired you etc._
+_The Project was possible only after immense efforts of the below mentioned people._
 
 * [Satyam](https://github.com/Satyam1345)
 * [Aniket Kumar](https://github.com/aniket-4971)
