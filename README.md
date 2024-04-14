@@ -1,7 +1,5 @@
 # WarrantBuddy: Digital Warrant Management System
 
-Website Link- 
-
 Website Overview Video Link- 
 
 # Key Features:- 
