@@ -15,8 +15,10 @@ router.get('/all',admincontroller.getall)
 // add data to database
 router.post("/register",admincontroller.registeradmin)
 router.post("/login",admincontroller.login)
-router.post("/issuewarrent",isAuthadmin,admincontroller.issuewarrent)
-router.post("/issuebail",admincontroller.issuebail)
+router.post("/issuewarrent",admincontroller.issuewarrent)
+// router.post("/issuebail",admincontroller.issuebail)
+router.get("/getpendingbailinfo",admincontroller.getpendingbailinfo)
+router.post("/pendingbailinfo",isAuthadmin,admincontroller.pendingbailinfo)
 
 // get data by some unique id
 router.get("/unique",isAuthadmin,admincontroller.unique)

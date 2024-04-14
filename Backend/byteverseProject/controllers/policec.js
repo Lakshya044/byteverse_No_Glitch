@@ -1,4 +1,7 @@
 const polices =require('../model/aspolice');
+const warrent =require('../model/warrentbyadmin');
+const warrentbypolice = require("../model/warrentbypolice");
+
 const appError=require("../utils/apperror")
 const bcrypt =require('bcrypt')
 const jwt =require("jsonwebtoken");
@@ -75,10 +78,51 @@ catch (error) {
     console.log("catch block");
 }
 };
+// {AadharNo:AadharNo}
+const provideWarrantByPolice=async (req, res) =>{
+try {
+    // const { warrantNo, AadharNo } = req.body;
+    const {policestationid}=req.body
+    const warrant = await warrent.findOne({ policestationid: policestationid });
+    console.log(policestationid);
+    if (!warrant) {
+      return res.status(404).json({ error: "Warrant not found" });
+    }
+    const finalwarrentbypolice=await warrentbypolice({
+        warrantNo:warrant.warrantNo,
+        warranttype:warrant.warranttype,
+        AadharNo:warrant.AadharNo,
+        details:warrant.details,
+        Accusedname:warrant.Accusedname,
+        pincode:warrant.pincode,
+     
+    
+    });
+    const storeData=await finalwarrentbypolice.save()
+         console.log(storeData);
+    res.status(201).json({ status: 201, storeData})
+    
 
+} catch (error) {
+    res.status(401).json(error);
+    console.log("catch block");
 
+}
+}
+const getwarrentinfo=async(req,res)=>{
+    const{policeStationid}=req.body;
+    console.log(req.body)
+    try{
+const pendingwarrant= await warrent.findOne({policestationid:policeStationid});
 
-
+console.log(pendingwarrant);
+const storeData=await pendingwarrant.save()
+res.status(201).json({ status: 201, storeData})
+} catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+}
 
 
 
@@ -111,4 +155,4 @@ catch (error) {
         res.status(500).json({error:error.message});
     }
 };
-module.exports={getall,registerpolice,login,unique,deleteid,updateid}
+module.exports={getall,registerpolice,provideWarrantByPolice,login,unique,deleteid,updateid,getwarrentinfo}

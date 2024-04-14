@@ -3,70 +3,79 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "../App.css";
 
 function IssueWarrant() {
-  const [warrantType, setWarrantType] = useState("Search Warrant");
-  const [warrantStatus, setWarrantStatus] = useState("Open");
-  const [accusedName, setAccusedName] = useState("");
-  const [aadharNo, setAadharNo] = useState("");
-  const [accusedAddress, setAccusedAddress] = useState("");
-  const [accusedPin, setAccusedPin] = useState("");
-  const [policeStation, setPoliceStation] = useState("");
-  const [issueReason, setIssueReason] = useState("");
-  const [geolocation, setGeolocation] = useState("");
-  const [currentTime, setCurrentTime] = useState("");
+  const [warrantNo, setWarrantNo] = useState("");
+  const [warrantType, setWarrantType] = useState("");
+  const [accussedName, setAccussedName] = useState("");
+  const [aadharnumber, setAadharnumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [pincode, setPincode] = useState("");
+  const [policeStationid, setPoliceStationid] = useState("");
+  const [status, setStatus] = useState("Open");
+  const [reason, setReason] = useState("");
 
-  useEffect(() => {
-    getLocationAndTime();
-  }, []); // Empty dependency array ensures this effect runs once when the component mounts
 
-  const getLocationAndTime = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          const { latitude, longitude } = position.coords;
-          setGeolocation(`Latitude ${latitude}, Longitude ${longitude}`);
-        },
-        (error) => {
-          setGeolocation(`Error: ${error.message}`);
-        }
-      );
-    } else {
-      setGeolocation("Geolocation is not supported by this browser.");
+
+  const handleWarrantNumberChange = (e) => {
+    setWarrantNo(e.target.value);
+  };
+  const handleWarrantTypeChange = (e) => {
+    setWarrantType(e.target.value);
+  };
+  const handleAccussedNameChange = (e) => {
+    setAccussedName(e.target.value);
+  };
+  const handleAadharChange = (e) => {
+    setAadharnumber(e.target.value);
+  };
+  const handleAddressChange = (e) => {
+    setAddress(e.target.value);
+  };
+  const handlePincodeChange = (e) => {
+    setPincode(e.target.value);
+  };
+  const handlePoliceStationChange = (e) => {
+    setPoliceStationid(e.target.value);
+  };
+  const handleWarrantStatusChange = (e) => {
+    setStatus(e.target.value);
+  };
+  const handleReasonChange = (e) => {
+    setReason(e.target.value);
+  };
+
+
+
+  const handleSubmit = async (event) => {
+    // alert("yuhi")
+    event.preventDefault();
+    const response = await fetch("http://localhost:5000/admin/issuewarrent", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify
+      ({
+        warrantNo: warrantNo,
+        warranttype :warrantType,
+        AadharNo:aadharnumber,
+        details:reason,
+        Accusedname:accussedName,
+        pincode:pincode,
+        policestationid:policeStationid,
+        status:status,
+        address:address,
+
+    })})
+    // alert("yuhi")
+    const res = await response.json();
+    // alert("yuhi")
+    console.log(res);
+    if(res.status===201){
+      alert("Warrant Issued")}
+    else{
+      alert("Error")
     }
-
-    const currentTime = new Date().toLocaleTimeString();
-    setCurrentTime(`Current time: ${currentTime}`);
   };
-
-  const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the form from submitting normally
-
-    // Handle the warrant submission logic here
-    console.log("Warrant Data:", {
-      warrantType,
-      warrantStatus,
-      accusedName,
-      aadharNo,
-      accusedAddress,
-      accusedPin,
-      policeStation,
-      issueReason,
-      geolocation,
-      currentTime,
-    });
-
-    // Reset the form
-    setWarrantType("Search Warrant");
-    setWarrantStatus("Open");
-    setAccusedName("");
-    setAadharNo("");
-    setAccusedAddress("");
-    setAccusedPin("");
-    setPoliceStation("");
-    setIssueReason("");
-    setGeolocation("");
-    setCurrentTime("");
-  };
-
   return (
     <>
       <div className="satyam d-flex flex-column align-items-center justify-content-center m-2 p-8">
@@ -74,35 +83,48 @@ function IssueWarrant() {
         <br />
         <div className="complaint-form text-white">
           <form onSubmit={handleSubmit}>
+         
             <div className="row">
               <div className="col-md-6 mb-3">
                 <div className="form-group">
-                  <label htmlFor="warrantType">Warrant Type</label>
-                  <select
+                  <label htmlFor="warrantNo">Warrant No</label>
+                  <input
+                    type="text"
                     className="form-control"
-                    id="warrantType"
-                    value={warrantType}
-                    onChange={(e) => setWarrantType(e.target.value)}
-                  >
-                    <option value="Search Warrant">Search Warrant</option>
-                    <option value="Arrest Warrant">Arrest Warrant</option>
-                  </select>
+                    id="warrantNo"
+                    placeholder="Warrant No"
+                    onChange={handleWarrantNumberChange}
+                    required
+                    value={warrantNo}
+                  />
                 </div>
               </div>
               <div className="col-md-6 mb-3">
+                <div className="form-group">
+                  <label htmlFor="warrantType">Warrant Type</label>
+                  <input
+                    className="form-control"
+                    id="warrantType"
+                    onChange={handleWarrantTypeChange}
+                    required
+                    value={warrantType}
+                  />
+                </div>
+              </div>
+              {/* <div className="col-md-6 mb-3">
                 <div className="form-group">
                   <label htmlFor="warrantStatus">Status of Warrant</label>
                   <select
                     className="form-control"
                     id="warrantStatus"
-                    value={warrantStatus}
-                    onChange={(e) => setWarrantStatus(e.target.value)}
+                    value={status}
+                    // onChange={(e) => setWarrantStatus(e.target.value)}
                   >
                     <option value="Open">Open</option>
                     <option value="Closed">Closed</option>
                   </select>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="row">
               <div className="col-md-6 mb-3">
@@ -112,9 +134,12 @@ function IssueWarrant() {
                     type="text"
                     className="form-control"
                     id="accusedName"
-                    value={accusedName}
-                    onChange={(e) => setAccusedName(e.target.value)}
+                   
+                   
                     placeholder="Accused Name"
+                    onChange={handleAccussedNameChange}
+                    required
+                    value={accussedName}
                   />
                 </div>
               </div>
@@ -125,9 +150,12 @@ function IssueWarrant() {
                     type="text"
                     className="form-control"
                     id="aadharNo"
-                    value={aadharNo}
-                    onChange={(e) => setAadharNo(e.target.value)}
+                   
+                    
                     placeholder="Aadhar No"
+                    onChange={handleAadharChange}
+                    required
+                    value={aadharnumber}
                   />
                 </div>
               </div>
@@ -140,9 +168,12 @@ function IssueWarrant() {
                     type="text"
                     className="form-control"
                     id="accusedAddress"
-                    value={accusedAddress}
-                    onChange={(e) => setAccusedAddress(e.target.value)}
+                    
+                    
                     placeholder="Address"
+                    onChange={handleAddressChange}
+                    required
+                    value={address}
                   />
                 </div>
               </div>
@@ -153,9 +184,12 @@ function IssueWarrant() {
                     type="text"
                     className="form-control"
                     id="accusedPin"
-                    value={accusedPin}
-                    onChange={(e) => setAccusedPin(e.target.value)}
+                    
+                    
                     placeholder="Pin Code"
+                    onChange={handlePincodeChange}
+                    required
+                    value={pincode}
                   />
                 </div>
               </div>
@@ -163,41 +197,63 @@ function IssueWarrant() {
             <div className="row">
               <div className="col-md-6 mb-3">
                 <div className="form-group">
-                  <label htmlFor="policeStation">Police Station</label>
+                  <label htmlFor="policeStation">Police Stationid</label>
                   <input
                     type="text"
                     className="form-control"
                     id="policeStation"
-                    value={policeStation}
-                    onChange={(e) => setPoliceStation(e.target.value)}
-                    placeholder="Police Station"
+                    placeholder="Police Stationid"
+                    onChange={handlePoliceStationChange}
+                    required
+                    value={policeStationid}
                   />
                 </div>
               </div>
               <div className="col-md-6 mb-3">
+                <div className="form-group">
+                  <label htmlFor="warrantStatus">Status of Warrant</label>
+                  <select
+                    className="form-control"
+                    id="warrantStatus"
+                    // value={warrantStatus}
+                    onChange={handleWarrantStatusChange}
+                    required
+                    value={status}
+                  >
+                    <option value="Open">Open</option>
+                    <option value="Closed">Closed</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-12 mb-3">
                 <div className="form-group">
                   <label htmlFor="issueReason">Reason of Issue</label>
                   <input
                     type="text"
                     className="form-control"
                     id="issueReason"
-                    value={issueReason}
-                    onChange={(e) => setIssueReason(e.target.value)}
+                    
                     placeholder="Reason of Issue"
+                    onChange={handleReasonChange}
+                    required
+                    value={reason}
                   />
                 </div>
               </div>
             </div>
             <div className="form-group">
-              <button type="submit" className="btn btn-primary btn-cmpln">
+              <input type="submit"  className="btnLogin" />
+              {/* <button type="button" className="btn btn-primary btn-cmpln">
                 Submit
-              </button>
+              </button> */}
             </div>
           </form>
-          <div>
+          {/* <div>
             <p>Location: {geolocation}</p>
             <p>Time: {currentTime}</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

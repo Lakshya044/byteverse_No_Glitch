@@ -11,10 +11,11 @@ const router=express.Router();
 
 // show all data
 router.get('/all',usercontroller.getall)
-
+router.post('/viewwarrent',usercontroller.viewwarrent)
 // add data to database
 router.post('/register',usercontroller.registeruser)
 router.post('/login',usercontroller.login)
+router.post('/requestbail',usercontroller.requestbail)
 
 // get data by some unique id
 router.get("/unique",isAuthuser,usercontroller.unique)

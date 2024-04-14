@@ -23,6 +23,7 @@ const isAuthuser = async (req, res, next) => {
   }
   req.token=token
   req.mainuser=mainuser
+  req.aadhar=mainuser.AadharNo
   req.UserId=mainuser._id
   
   next();

@@ -1,4 +1,3 @@
-
 const mongoose=require("mongoose");
 const userbail =new mongoose.Schema({
     
@@ -15,6 +14,11 @@ const userbail =new mongoose.Schema({
             type:String,
             // required:true
         },
+        status:{
+            type: String,
+            enum: ['pending', 'approved', 'rejected'],
+            default: 'pending'
+        }
     })
     const bailrequest =mongoose.model("bailrequest",userbail)
     module.exports=bailrequest;
