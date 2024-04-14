@@ -6,7 +6,7 @@ function HomeGrid() {
   const navigate = useNavigate();
   const bot = () => {
     // Navigate to the sign-up component
-    navigate("/bot");
+    navigate("/chatBot");
   };
   return (
     
