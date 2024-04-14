@@ -1,5 +1,5 @@
 const admins =require('../model/asAdmin');
-const warrent =require('../model/warrent');
+const warrent =require('../model/warrentbyadmin');
 const users=require("../model/asuser")
 const bailrequest=require("../model/bailrequest")
 const bail=require("../model/bailresponse")
@@ -81,12 +81,19 @@ catch (error) {
 };
 const issuewarrent=async(req,res)=>{
     try{
-const{AadharNo,details}=req.body;
+const{warrantNo, warranttype,Accusedname,AadharNo,details,pincode,policestationid,status,address}=req.body;
 const adminwarrent=await users.findOne({AadharNo:AadharNo});
 console.log(adminwarrent)
 const finalwarrent=await warrent({
+    warrantNo:warrantNo,
+    warranttype:warranttype,
     AadharNo:AadharNo,
-    details:details
+    details:details,
+    Accusedname:Accusedname,
+    pincode:pincode,
+    policestationid:policestationid,
+    status:status,
+    address:address,
 });console.log(finalwarrent)
 const storeData=await finalwarrent.save()
      console.log(storeData);
@@ -99,11 +106,31 @@ res.status(201).json({ status: 201, storeData})
   }
 
 }
-
-const issuebail=async(req,res)=>{
+let data=5;
+const getpendingbailinfo=async(req,res)=>{
+    try{
+const pendingbail=await bailrequest.findOne({status:'pending'});
+data=pendingbail.AadharNo;
+console.log(data);
+res.status(201).json({ status: 201, data})
+} catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+}
+// let useses=data;
+// console.log(useses)
+const pendingbailinfo=async(req,res)=>{
     try{
 const{AadharNo,status}=req.body;
-const userinfo=await users.findOne({AadharNo:AadharNo});
+
+
+// console.log(AadharNo);
+const userinfo=await bailrequest.findOne({AadharNo:AadharNo});
+// if(userinfo.status=="pending"){
+
+//     userinfo.status="approved";
+// }
 console.log(userinfo)
 const adminrespond=await bail({
     AadharNo:AadharNo,
@@ -120,6 +147,28 @@ res.status(201).json({ status: 201,  bailData})
   }
 
 }
+
+
+// const issuebail=async(req,res)=>{
+//     try{
+// const{AadharNo,status}=req.body;
+// const userinfo=await users.findOne({AadharNo:AadharNo});
+// console.log(userinfo)
+// const adminrespond=await bail({
+//     AadharNo:AadharNo,
+//     status: status,
+// });console.log(adminrespond)
+// const bailData=await adminrespond.save()
+//      console.log( bailData);
+// res.status(201).json({ status: 201,  bailData})
+
+
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send('Internal Server Error');
+//   }
+
+// } ,issuebail
 
 
 
@@ -153,4 +202,4 @@ const unique=async(req,res)=>{
         res.status(500).json({error:error.message});
     }
 };
-module.exports={getall,login,registeradmin,issuewarrent,issuebail,unique,deleteid,updateid}
+module.exports={getall,login,registeradmin,issuewarrent,getpendingbailinfo,pendingbailinfo,unique,deleteid,updateid}

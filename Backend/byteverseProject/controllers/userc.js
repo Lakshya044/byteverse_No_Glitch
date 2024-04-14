@@ -1,5 +1,7 @@
 const appError = require("../utils/apperror");
 const users = require("../model/asuser");
+const warrentbypolice = require("../model/warrentbypolice");
+const bailrequest=require("../model/bailrequest")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const keysecret = process.env.JWT_SECRET;
@@ -78,6 +80,19 @@ const login = async (req, res, next) => {
   }
 };
 
+const viewwarrent= async (req, res) =>{
+  const { AadharNo } = req.body;
+  try {
+    const user = await warrentbypolice.findOne({ AadharNo: AadharNo });
+    console.log(user);
+    res.status(422).json({ status: 201, user});
+  } catch (error) {
+    res.status(401).json(error);
+    console.log("catch block");
+  }
+}
+
+
 const unique = async (req, res) => {
   res.status(200).json({
     success: true,
@@ -118,6 +133,33 @@ const updateid = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+const requestbail=async(req,res)=>{
+  try{
+const{Aadharno,status,details}=req.body;
+const bailuser=await users.findOne({AadharNo:Aadharno});
+console.log(bailuser)
+const finalbail=await bailrequest({
+  AadharNo:Aadharno,
+  detail:details,
+  status:status
+});
+const storeData=await finalbail.save()
+   console.log(storeData);
+res.status(201).json({ status: 201, storeData})
+} catch (error) {
+  console.error(error);
+  res.status(500).send('Internal Server Error');
+}}
+// const warrentissued=async(req,res)=>{
+//   try{
+//   const{AadharNo}=req.body;
+//   const warrentissue=await warrent.findOne({AadharNo:AadharNo});
+//   console.log(warrentissue);
+//   res.status(201).json({ status: 201, warrentissue})
+// }catch (error) {
+//   console.error(error);
+//   res.status(500).send('Internal Server Error');
+// }
+// }
 
-
-module.exports = { getall, registeruser, login, unique, deleteid, updateid };
+module.exports = { getall, registeruser,viewwarrent,requestbail, login, unique, deleteid, updateid };
