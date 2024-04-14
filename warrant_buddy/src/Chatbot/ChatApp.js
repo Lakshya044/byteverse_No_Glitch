@@ -1,7 +1,7 @@
 // ChatApp.js
 
 import React, { useState } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import Lower_Navbar from '../Components/Lower_Navbar';
 import Upper_Navbar from '../Components/Upper_Navbar';
 import Footer from '../Components/Footer';

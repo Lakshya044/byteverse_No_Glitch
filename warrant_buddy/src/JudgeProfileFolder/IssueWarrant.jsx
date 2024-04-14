@@ -83,7 +83,7 @@ function IssueWarrant() {
         <br />
         <div className="complaint-form text-white">
           <form onSubmit={handleSubmit}>
-          <form onSubmit={handleSubmit}>
+         
             <div className="row">
               <div className="col-md-6 mb-3">
                 <div className="form-group">
@@ -111,20 +111,20 @@ function IssueWarrant() {
                   />
                 </div>
               </div>
-              <div className="col-md-6 mb-3">
+              {/* <div className="col-md-6 mb-3">
                 <div className="form-group">
                   <label htmlFor="warrantStatus">Status of Warrant</label>
                   <select
                     className="form-control"
                     id="warrantStatus"
-                    value={warrantStatus}
-                    onChange={(e) => setWarrantStatus(e.target.value)}
+                    value={status}
+                    // onChange={(e) => setWarrantStatus(e.target.value)}
                   >
                     <option value="Open">Open</option>
                     <option value="Closed">Closed</option>
                   </select>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="row">
               <div className="col-md-6 mb-3">
@@ -134,8 +134,8 @@ function IssueWarrant() {
                     type="text"
                     className="form-control"
                     id="accusedName"
-                    value={accusedName}
-                    onChange={(e) => setAccusedName(e.target.value)}
+                   
+                   
                     placeholder="Accused Name"
                     onChange={handleAccussedNameChange}
                     required
@@ -150,8 +150,8 @@ function IssueWarrant() {
                     type="text"
                     className="form-control"
                     id="aadharNo"
-                    value={aadharNo}
-                    onChange={(e) => setAadharNo(e.target.value)}
+                   
+                    
                     placeholder="Aadhar No"
                     onChange={handleAadharChange}
                     required
@@ -168,8 +168,8 @@ function IssueWarrant() {
                     type="text"
                     className="form-control"
                     id="accusedAddress"
-                    value={accusedAddress}
-                    onChange={(e) => setAccusedAddress(e.target.value)}
+                    
+                    
                     placeholder="Address"
                     onChange={handleAddressChange}
                     required
@@ -184,8 +184,8 @@ function IssueWarrant() {
                     type="text"
                     className="form-control"
                     id="accusedPin"
-                    value={accusedPin}
-                    onChange={(e) => setAccusedPin(e.target.value)}
+                    
+                    
                     placeholder="Pin Code"
                     onChange={handlePincodeChange}
                     required
@@ -234,8 +234,7 @@ function IssueWarrant() {
                     type="text"
                     className="form-control"
                     id="issueReason"
-                    value={issueReason}
-                    onChange={(e) => setIssueReason(e.target.value)}
+                    
                     placeholder="Reason of Issue"
                     onChange={handleReasonChange}
                     required
@@ -251,10 +250,10 @@ function IssueWarrant() {
               </button> */}
             </div>
           </form>
-          <div>
+          {/* <div>
             <p>Location: {geolocation}</p>
             <p>Time: {currentTime}</p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>
