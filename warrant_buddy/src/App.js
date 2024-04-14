@@ -21,11 +21,13 @@ import PoliceProfile from "./SignUp/PoliceProfile";
 import Judge_Profile from "./JudgeProfileFolder/Judge_Profile";
 import Client_Profile from "./Page2/Profile";
 import Police_Profile from "./Police/Police_Profile";
+import ChatApp from "./Chatbot/ChatApp";
 function App() {
   return (
     <>
       <BrowserRouter>
         <Routes>
+        <Route path="/chatBot" element={<ChatApp />} />
           {/* <Route path="/" element={<Testing />} /> */}
           <Route path="/" element={<Home />} />
           <Route path="/signupChoice" element={<SignUpChoice/>} />
