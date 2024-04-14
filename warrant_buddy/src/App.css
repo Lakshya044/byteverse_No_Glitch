@@ -212,3 +212,22 @@ form {
 .navbar-bg{
   background-color: rgb(255, 0, 0);
 }
+
+.bot{
+  margin-left: 5.005%;
+  margin-top: 0.5%;
+  padding: 3% ;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.chatbot-output {
+      background-color: #f4f4f4; 
+      color: #333; 
+      padding: 15px; 
+      border-radius: 5px; 
+      margin-top: 20px; 
+      font-size: 16px; 
+      border: 1px solid #ddd; 
+}

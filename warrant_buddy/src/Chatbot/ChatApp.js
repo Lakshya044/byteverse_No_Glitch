@@ -2,7 +2,11 @@
 
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import Lower_Navbar from '../Components/Lower_Navbar';
+import Upper_Navbar from '../Components/Upper_Navbar';
+import Footer from '../Components/Footer';
+import "../App.css" ;
+ 
 const ChatApp = () => {
     const [message, setMessage] = useState('');
     const [output, setOutput] = useState('');
@@ -12,22 +16,7 @@ const ChatApp = () => {
         setMessage(e.target.value);
     };
 
-    // const handleSubmit = async (e) => {
-    //     e.preventDefault();
-
-    //     // Send user message to backend for processing
-    //     try {
-    //         const response = await axios.post('/process-message', { message });
-    //         const { message: chatResponse } = response.data;
-
-    //         // Update chat history with user message and bot response
-    //         setChatHistory([...chatHistory, { user: message, bot: chatResponse }]);
-    //         setMessage(''); // Clear input field
-    //     } catch (error) {
-    //         console.error('Error processing message:', error);
-    //     }
-    // };
-   
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -63,24 +52,75 @@ const ChatApp = () => {
         }
     };
     
-    return (
-        <div className="chat-container">
-            <h1 className="chat-header">Chatbot</h1>
-            {/* <div className="chat-history">
-                {chatHistory.map((chat, index) => (
-                    <div key={index} className="message-container">
-                        <div className="user-message">You: {chat.user}</div>
-                        <div className="bot-message">Bot: {chat.bot}</div>
-                    </div>
-                ))}
-            </div> */}
+    return <>
+        <Upper_Navbar/>
+        <Lower_Navbar/>
+
+        <div className="bot">
+          <div className="chat-container">
+          <h1 className="chat-header" style={{ color: '#007bff', fontWeight: 'bold', textShadow: '2px 2px 4px #000000' }}>Chatbot</h1>
+
             <form onSubmit={handleSubmit} className="message-form">
-                <input type="text" value={message} onChange={handleMessageChange} className="message-input" />
-                <button type="submit" className="send-button">Send</button>
+            <input 
+  type="text" 
+  value={message} 
+  onChange={handleMessageChange} 
+  className="message-input" 
+  style={{ 
+    margin: '10px 20px',
+    padding: '10px', 
+    fontSize: '16px', 
+    border: '2px solid #007bff', 
+    borderRadius: '4px', 
+    outline: 'none', 
+    boxShadow: '0px 0px 5px rgba(0, 123, 255, 0.5)'
+  }} 
+/>
+
+<button 
+  type="submit" 
+  className="send-button" 
+  style={{ 
+    margin: '10px 20px',
+    padding: '10px 20px', 
+    fontSize: '16px', 
+    backgroundColor: '#007bff', 
+    color: '#fff', 
+    border: 'none', 
+    borderRadius: '4px', 
+    cursor: 'pointer', 
+    boxShadow: '0px 0px 5px rgba(0, 123, 255, 0.5)'
+  }} 
+>
+  Send
+</button>
+
             </form>
-            <p>{output}</p>
+            <p 
+  className="chatbot-output"
+  style={{
+    backgroundColor: '#e6f2ff', // Light blue background
+    padding: '10px',
+    borderRadius: '4px',
+    height: '200px',
+    width: '1200px',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0px 0px 5px rgba(0, 0, 0, 0.1)', // Light shadow
+    marginTop: '10px',
+    color: '#333', // Dark text color
+    overflowY: 'auto' // Enable vertical scrolling
+  }}
+>
+  {output}
+</p>
+
+
+          </div>
         </div>
-    );
+
+        <Footer/>
+    </>
 };
 
 export default ChatApp;
