@@ -5,12 +5,7 @@ import {
 } from "react-router-dom";
 import React from "react";
 import "./App.css";
-// import Lower_Navbar from "./Components/Lower_Navbar";
-// import Carousel from "./Components/Carousel";
-// import Footer from "./Components/Footer";
-// import HomeGrid from "./Components/HomeGrid";
-// import Upper_Navbar from "./Components/Upper_Navbar";
-// import Div_Guidelines from "./Components/Div_Guidelines";
+import Profile from "./Page2/Profile";
 
 import LoginForm from "./Login/LoginForm";
 import SignUpChoice from "./SignUp/SignUpChoice";
@@ -21,6 +16,7 @@ import PoliceProfile from "./SignUp/PoliceProfile";
 import Judge_Profile from "./JudgeProfileFolder/Judge_Profile";
 import Client_Profile from "./Page2/Profile";
 import Police_Profile from "./Police/Police_Profile";
+
 function App() {
   return (
     <>

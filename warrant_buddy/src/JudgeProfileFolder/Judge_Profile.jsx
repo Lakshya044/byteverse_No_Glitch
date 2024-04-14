@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-//import Lower_Navbar_2 from "../Page2/Lower_Navbar_2";
+// import Lower_Navbar_2 from "../Page2/Lower_Navbar_2";
+// import Lower_Navbar_2 from "../Page2/Lower_Navbar_2" ;
 import Footer from "../Components/Footer";
 import JudgeIssuedWarrants from "./JudgeIssuedWarrants";
 import JudgeRegisterComplaint from "./JudgeRegisterComplaint";
@@ -7,6 +8,7 @@ import IssueWarrant from "./IssueWarrant";
 import preamble from "../Assets/preamble.jpg";
 import warrantBuddy from "../Assets/warrantBuddy.jpg";
 import React, { useState } from "react";
+import "../App.css";
 
 function Lower_Navbar_2() {
     const [showDropdown, setShowDropdown] = useState(false);
@@ -16,7 +18,7 @@ function Lower_Navbar_2() {
     };
   
     return (
-      <nav className="navbar navbar-light bg-light d-flex justify-content-between align-items-center">
+      <nav className="navbar navbar-light bg-light d-flex justify-content-between align-items-center navbar-bg">
         <div className="d-flex align-items-center">
           <img
             src={preamble}

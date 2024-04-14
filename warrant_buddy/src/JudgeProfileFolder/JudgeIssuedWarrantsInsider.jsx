@@ -38,12 +38,12 @@ function JudgeIssuedWarrantsInsider() {
 
   return (
     <>
-      <div className="d-inline-block bg-primary text-white p-3 rounded">
+      <div className="d-inline-block bg-primary text-white p-3 rounded uniform-clr">
       <div>
         <h1>Warrants Issued against You</h1>
       </div>
       <div className="overflow-auto"> {/* Added overflow-auto class for scrollable content */}
-        <table className="table table-striped table-bordered table-hover text-white rounded">
+        <table className="table table-striped table-bordered table-hover text-white rounded uniform-clr">
           <thead>
             <tr>
               <th scope="col">S No.</th>

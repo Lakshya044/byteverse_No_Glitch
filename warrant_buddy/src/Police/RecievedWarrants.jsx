@@ -56,6 +56,7 @@ function ReceivedWarrants() {
               <th scope="col">Pin Code</th>
               <th scope="col">Police Station</th>
               <th scope="col">Status</th>
+              {/* <th scope="col"> <button  onClick={}></button> </th> */}
             </tr>
           </thead>
           <tbody>

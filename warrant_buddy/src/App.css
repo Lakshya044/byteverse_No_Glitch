@@ -204,3 +204,11 @@ form {
 .btn-cmpln {
   margin-left: 160px;
 }
+
+.uniform-clr{
+  background-color: #2134b7;
+}
+
+.navbar-bg{
+  background-color: rgb(255, 0, 0);
+}
